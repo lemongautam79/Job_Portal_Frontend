@@ -14,8 +14,10 @@ import {
 } from 'lucide-react'
 import { useState } from 'react';
 import { validateAvatar, validateEmail, validatePassword } from '../../utils/helper';
-import { axiosInstance } from '../../utils/axiosInstance';
 import { useAuth } from '../../context/AuthContext';
+import axiosInstance from '../../utils/axiosInstance';
+import uploadImage from '../../utils/uploadImage';
+import { API_PATHS } from '../../utils/apiPaths';
 
 const SignUp = () => {
 
@@ -130,7 +132,7 @@ const SignUp = () => {
                 email: formData.email,
                 password: formData.password,
                 role: formData.role,
-                avatar: formData.avatar || "",
+                avatar: avatarUrl || "",
             })
 
             // Handle successful registration
