@@ -15,6 +15,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import moment from 'moment'
 import { getInitials } from "../../utils/helper"
 import StatusBadge from "../../components/StatusBadge"
+import ApplicantProfilePreview from "../../components/Cards/ApplicantProfilePreview"
 
 const ApplicationViewer = () => {
 
@@ -232,6 +233,18 @@ const ApplicationViewer = () => {
                     )}
                 </div>
 
+                {/* Profile Modal */}
+                {selectedApplicant && (
+                    <ApplicantProfilePreview
+                        selectedApplicant={selectedApplicant}
+                        setSelectedApplicant={setSelectedApplicant}
+                        handleDownloadResume={handleDownloadResume}
+                        handleClose={() => {
+                            setSelectedApplicant(null);
+                            fetchApplications();
+                        }}
+                    />
+                )}
 
             </div>
         </DashboardLayout>
