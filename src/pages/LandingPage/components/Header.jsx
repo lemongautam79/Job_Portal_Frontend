@@ -37,7 +37,7 @@ const Header = () => {
                         <a
                             onClick={() => {
                                 navigate(
-                                    isAuthenticated && user?.role === "employer" ? "/employer-dashboard" : "/login"
+                                    isAuthenticated && user?.role === "EMPLOYER" ? "/employer-dashboard" : "/login"
                                 )
                             }}
                             className="text-gray-600 hover:text-gray-900 transition-colors font-medium"
@@ -55,7 +55,7 @@ const Header = () => {
                                 </span>
                                 <a
                                     href={
-                                        user?.role === "employer" ?
+                                        user?.role === "EMPLOYER" ?
                                             "/employer-dashboard"
                                             : "/find-jobs"
                                     }
