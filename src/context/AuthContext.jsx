@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect, useCallback } from "react";
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 // export const useAuth = () => {
 //     const context = useContext(AuthContext)
@@ -14,6 +14,16 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    const logout = useCallback(() => {
+        localStorage.removeItem("token")
+        localStorage.removeItem("refreshToken")
+        localStorage.removeItem("user")
+
+        setUser(null);
+        setIsAuthenticated(false);
+        window.location.href = "/"
+    }, []);
 
     const checkAuthStatus = useCallback(async () => {
         try {
@@ -44,16 +54,6 @@ export const AuthProvider = ({ children }) => {
         setUser(userData);
         setIsAuthenticated(true);
     };
-
-    const logout = useCallback(() => {
-        localStorage.removeItem("token")
-        localStorage.removeItem("refreshToken")
-        localStorage.removeItem("user")
-
-        setUser(null);
-        setIsAuthenticated(false);
-        window.location.href = "/"
-    }, []);
 
     const updateUser = (updatedUserData) => {
         const newUserData = { ...user, ...updatedUserData }
